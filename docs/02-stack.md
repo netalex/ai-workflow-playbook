@@ -135,7 +135,11 @@ Keep the **role**, not the brand.
 
 Examples:
 
-- replace Claude Desktop with another reasoning layer with MCP client
+- replace Claude Desktop with another reasoning layer with MCP client capabilities
+<!-- TODO: make examples -->
 - replace Cline with another editor execution layer
+<!-- TODO: make examples -->
 - replace CtxVault with another durable local memory system
+<!-- TODO: make examples -->
 - replace Repomix with another packaging layer that can preserve the same discipline
+<!-- TODO: make examples -->

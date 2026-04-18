@@ -158,6 +158,9 @@ Use extraction tools to turn source documents into markdown before chunking.
 
 Use Playwright MCP for browser-driven validation or reproducible UI exploration.
 
+Examples:
+- generating application screenshot lively updated during development
+
 ### Do not use it for
 
 - tasks that can be answered from code or docs alone
