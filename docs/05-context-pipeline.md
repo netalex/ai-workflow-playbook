@@ -11,6 +11,8 @@ This playbook uses two main lanes:
 1. **repository context packaging** with repomix
 2. **document knowledge packaging** with pre-chunked vault material
 
+For especially sensitive or official source drops, the document lane often expands into a **workbench lane** that exists before either the main project repo or the vault.
+
 ## Core rule
 
 Do not treat raw files, raw repositories, and raw documents as the default input format for LLMs.
@@ -59,6 +61,33 @@ Use this lane when the task depends on functional, architectural, procedural, or
 - better control over stale or immutable material
 - lower token cost during retrieval
 
+## Lane C: official document workbench
+
+Use this lane when the sources are:
+
+- official
+- sensitive
+- large
+- screenshot-heavy
+- likely to contain conflicting or historically layered information
+
+### Preferred order
+
+1. freeze originals in a workbench repo or workbench directory
+2. create technical working copies
+3. run DOCX preflight QA
+4. run probe extraction and master extraction locally
+5. inspect style noise, TOC artifacts, tracked changes, and media behavior
+6. build canonical chunks, source maps, and conflict registers
+7. promote only validated artifacts into the main project repo or vault
+
+### Why this helps
+
+- preserves provenance
+- keeps raw official sources out of the normal LLM surface area
+- separates noisy working material from project-facing truth
+- gives you a place to handle screenshot inventories and source conflicts deliberately
+
 ## Material classes
 
 ### Transient
@@ -85,6 +114,7 @@ Examples:
 - skills
 - normalized chunk corpus
 - commit-ready docs
+- screenshot inventories for legacy UI evidence
 
 ## Durable destinations
 
@@ -120,7 +150,19 @@ Examples:
 - immutable external documents
 - prior-generation system references
 
-See [docs/14-ctxvault-and-skills.md](14-ctxvault-and-skills.md).
+### Workbench repository or workbench area
+
+Use when the content is too raw, too sensitive, or too operationally noisy to belong yet in either the main project repo or a vault.
+
+Examples:
+
+- original official source drops
+- working copies of DOCX files
+- probe extraction output
+- screenshot inventories still under review
+- conflict registers comparing old internal docs against new official sources
+
+See [docs/16-official-document-workbench.md](16-official-document-workbench.md).
 
 ## Filesystem MCP boundary
 
@@ -132,6 +174,8 @@ A practical safety pattern is:
 
 This reduces both token cost and accidental overexposure.
 
+The same principle applies to official document workbenches: do not expose the raw workbench by default just because it exists locally.
+
 ## Success condition
 
 The pipeline is working when you can answer:
@@ -139,3 +183,4 @@ The pipeline is working when you can answer:
 - why this context was chosen
 - what was deliberately excluded
 - where durable knowledge will be stored afterward
+- whether the material first belongs in a workbench before it belongs in the main project surface

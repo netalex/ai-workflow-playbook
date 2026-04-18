@@ -14,6 +14,9 @@ It verifies the presence of the local tools most frequently used in the playbook
 - ctxvault
 - ctxvault-mcp
 - repomix
+- pandoc
+- docling
+- magick
 
 The output is designed for humans first.
 The script does not modify the machine state.
@@ -36,7 +39,10 @@ $tools = @(
   'code',
   'ctxvault',
   'ctxvault-mcp',
-  'repomix'
+  'repomix',
+  'pandoc',
+  'docling',
+  'magick'
 )
 
 Write-Host "Checking local tool availability..." -ForegroundColor Cyan
@@ -81,4 +87,5 @@ else {
 
   Write-Host ""
   Write-Host "Hint: this playbook assumes ctxvault and ctxvault-mcp are installed via uv tool." -ForegroundColor DarkGray
+  Write-Host "Hint: pandoc, docling, and a local image conversion tool matter more when you process official DOCX-heavy source drops." -ForegroundColor DarkGray
 }

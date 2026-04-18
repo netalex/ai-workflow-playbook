@@ -112,7 +112,29 @@ You need to transform scattered material into structured, durable knowledge.
 6. decide the next smallest step
 7. continue only after the scope is clear again
 
-## 6. Document ingestion work
+## 6. Official source drop or sensitive document workbench
+
+### Best when
+
+You receive official documentation that is large, sensitive, high-value, or structurally fragile.
+
+### Sequence
+
+1. freeze the originals in a dedicated workbench repo or workbench area
+2. create working copies for technical normalization only
+3. write confidentiality, source-priority, and encoding rules first
+4. run DOCX preflight QA before conversion
+5. run a probe extraction to surface styles, TOC noise, review artifacts, and media
+6. run a cleaner master extraction for human reading
+7. build canonical chunks from the reviewed outputs, not from raw documents
+8. produce source maps, conflict registers, and screenshot inventories
+9. promote only validated artifacts into the main project repo or a vault
+
+### Rule
+
+Do not treat the main project repository as the first landing zone for raw official source drops.
+
+## 7. Document ingestion work
 
 ### Best when
 
@@ -132,7 +154,7 @@ You have new source documents that must become queryable knowledge.
 
 See [docs/11-document-ingestion-and-chunking.md](11-document-ingestion-and-chunking.md).
 
-## 7. Repeated prompting work
+## 8. Repeated prompting work
 
 ### Rule
 

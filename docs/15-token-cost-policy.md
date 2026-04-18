@@ -29,6 +29,7 @@ Every task should try to answer:
 5. prefer composite bundles over monolithic bundles
 6. convert repeated prompting into templates or skills
 7. archive historical material in a dedicated vault instead of dragging it into current prompts
+8. for official source drops, do the noisy work in a local workbench before anything becomes part of the normal LLM-visible surface
 
 ## Practical rules
 
@@ -60,18 +61,37 @@ Convert it into:
 
 Estimate bundle size and split when needed.
 
+### Rule 6
+
+Do not let probe extraction output become the canonical corpus for official documents.
+
+Probe output is useful because it is noisy. It is cheap to inspect once and expensive to keep dragging into every future prompt.
+
+### Rule 7
+
+Treat screenshots and high-value figures selectively.
+
+Do not dump every extracted image into an LLM session. Promote only the screenshots that actually carry workflow, UI, or system knowledge.
+
 ## Useful heuristics
 
 - a structure-only bundle is often enough for planning
 - a last-commit bundle is often enough for review
 - a refined chunk corpus is often better than a single big document
 - a skill is cheaper than repeating a long operational prompt forever
+- a workbench repo is cheaper than mixing raw official drops into the main project surface too early
 
 ## Good question to ask the AI
 
 ```text
 Given this task, suggest the minimum useful set of files or modules for a repomix bundle.
-Also tell me what should be excluded from the content pass or fully excluded to reduce token cost.
+Also tell me what should stay listed-only or fully excluded to reduce token cost.
+```
+
+For official documents, a better version is:
+
+```text
+Given this source drop, which files should be treated as raw evidence only, which should become master markdown, and which chunk families deserve first-class promotion into the knowledge base?
 ```
 
 ## Success condition
