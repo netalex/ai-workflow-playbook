@@ -7,7 +7,9 @@ Use prompts as repeatable operational tools, not improvised one-off messages.
 ## Prompt layers
 
 ### 1. Identity and style
+
 Stable instructions such as:
+
 - language conventions
 - coding preferences
 - review expectations
@@ -15,14 +17,18 @@ Stable instructions such as:
 - documentation tone
 
 ### 2. Project context
+
 Semi-stable instructions such as:
+
 - architecture rules
 - framework constraints
 - repository conventions
 - team expectations
 
 ### 3. Task instructions
+
 Highly specific instructions such as:
+
 - deliverable
 - touched files
 - constraints
@@ -77,6 +83,7 @@ This reduces large unreviewed jumps.
 If a prompt affects repeated work, store it in the repository or the vault.
 
 Examples:
+
 - system prompt variants
 - code review prompts
 - doc synthesis prompts

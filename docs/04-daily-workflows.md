@@ -3,9 +3,11 @@
 ## 1. New feature or enhancement
 
 ### Best when
+
 You know the target outcome but need help structuring the work.
 
 ### Sequence
+
 1. define the deliverable
 2. identify the smallest relevant code area
 3. package focused context
@@ -16,6 +18,7 @@ You know the target outcome but need help structuring the work.
 8. end on a clean commit-ready state
 
 ### Good output from AI
+
 - implementation plan
 - touched files list
 - risk notes
@@ -25,9 +28,11 @@ You know the target outcome but need help structuring the work.
 ## 2. Refactor
 
 ### Best when
+
 You want to improve structure without changing behavior.
 
 ### Sequence
+
 1. state the behavioral boundary clearly
 2. gather the current code slice
 3. ask for refactor options with trade-offs
@@ -37,14 +42,17 @@ You want to improve structure without changing behavior.
 7. document any new architectural rule
 
 ### Rule
+
 Never start a refactor with “clean this up” as the only instruction.
 
 ## 3. Bug investigation
 
 ### Best when
+
 You have symptoms, logs, or a failing flow.
 
 ### Sequence
+
 1. capture the symptom
 2. capture reproduction steps
 3. isolate the likely subsystem
@@ -54,6 +62,7 @@ You have symptoms, logs, or a failing flow.
 7. record the actual root cause once confirmed
 
 ### Good prompt shape
+
 - symptom
 - expected behavior
 - actual behavior
@@ -64,9 +73,11 @@ You have symptoms, logs, or a failing flow.
 ## 4. Documentation work
 
 ### Best when
+
 You need to transform scattered material into structured, durable knowledge.
 
 ### Sequence
+
 1. collect raw notes
 2. identify the target doc type
 3. ask for structure first, prose second
@@ -74,6 +85,7 @@ You need to transform scattered material into structured, durable knowledge.
 5. publish only after cleanup and deduplication
 
 ### Useful outputs
+
 - ADR draft
 - architecture summary
 - setup guide
@@ -83,6 +95,7 @@ You need to transform scattered material into structured, durable knowledge.
 ## 5. Session recovery after interruption
 
 ### Sequence
+
 1. read the latest durable notes
 2. review the current git diff
 3. recover the original goal

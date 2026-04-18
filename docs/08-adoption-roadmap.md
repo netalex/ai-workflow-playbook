@@ -3,9 +3,11 @@
 ## Stage 1 - Make the workflow visible
 
 Goal:
+
 - stop relying on memory alone
 
 Actions:
+
 - write a README
 - store recurring prompts
 - record the stack roles
@@ -14,9 +16,11 @@ Actions:
 ## Stage 2 - Make the workflow repeatable
 
 Goal:
+
 - reduce improvisation
 
 Actions:
+
 - standardize context packaging
 - create reusable templates
 - write session recovery notes
@@ -25,9 +29,11 @@ Actions:
 ## Stage 3 - Make the workflow portable
 
 Goal:
+
 - survive tool changes
 
 Actions:
+
 - separate roles from brands
 - keep prompts and notes outside vendor silos
 - document substitution paths
@@ -36,9 +42,11 @@ Actions:
 ## Stage 4 - Make the workflow publishable
 
 Goal:
+
 - let another person understand and reuse it
 
 Actions:
+
 - clean internal references
 - add examples
 - add issue and PR templates
@@ -47,9 +55,11 @@ Actions:
 ## Stage 5 - Make the workflow measurable
 
 Goal:
+
 - decide whether the workflow is actually helping
 
 Possible metrics:
+
 - time to recover context
 - time to first useful draft
 - number of review cycles per change

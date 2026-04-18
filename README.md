@@ -1,6 +1,6 @@
 # AI Workflow Playbook
 
-A publishable, opinionated, human-in-the-loop workflow for using AI across documentation, coding, refactoring, debugging, and repository hygiene.
+An opinionated, human-in-the-loop workflow for using AI across documentation, coding, refactoring, debugging, and repository hygiene.
 
 This repository documents a practical stack centered on:
 
@@ -92,17 +92,20 @@ This playbook is especially useful if you:
 
 ## Recommended operating rhythm
 
-**Before a session**
+### **Before a session**
+
 - clarify the deliverable
 - fetch only the relevant project context
 - define the success conditions
 
-**During a session**
+### **During a session**
+
 - keep the AI focused on one bounded task
 - review partial outputs early
 - preserve useful decisions in durable notes
 
-**At the end of a session**
+### **At the end of a session**
+
 - convert useful chat into repository assets
 - update docs, prompts, and operational notes
 - produce a clean commit or a clean stopping point
@@ -123,7 +126,7 @@ That separation keeps the stack understandable and replaceable.
 
 ## Publishing notes
 
-This repository is intentionally documentation-first so it can be published as-is, forked, or adapted to a company-specific workflow.
+This repository is intentionally documentation-first so it can be published as-is, forked, or adapted to a team-specific or company-specific workflow.
 
 Before publishing publicly, review:
 
