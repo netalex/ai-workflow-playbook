@@ -71,7 +71,7 @@ Estimate bundle size and split when needed.
 
 ```text
 Given this task, suggest the minimum useful set of files or modules for a repomix bundle.
-Also tell me what should stay listed-only or excluded to reduce token cost.
+Also tell me what should be excluded from the content pass or fully excluded to reduce token cost.
 ```
 
 ## Success condition

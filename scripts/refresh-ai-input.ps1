@@ -18,6 +18,9 @@ Optional repository root. Defaults to the parent of the scripts directory.
 .PARAMETER GenerateLastCommitBundle
 If set, the script also generates a small repomix bundle for the files changed in HEAD.
 
+.PARAMETER IncludeDocsInLastCommitBundle
+If set together with GenerateLastCommitBundle, documentation files under docs/ are also eligible for the last-commit bundle.
+
 .NOTES
 Run from the repository root:
   pwsh ./scripts/refresh-ai-input.ps1
@@ -26,7 +29,8 @@ Run from the repository root:
 [CmdletBinding()]
 param(
   [string]$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
-  [switch]$GenerateLastCommitBundle
+  [switch]$GenerateLastCommitBundle,
+  [switch]$IncludeDocsInLastCommitBundle
 )
 
 Set-StrictMode -Version Latest
@@ -107,7 +111,10 @@ Write-Utf8NoBom -Path (Join-Path $ManifestDir 'workspace-snapshot.json') -Conten
 if ($GenerateLastCommitBundle) {
   $repomix = Get-Command repomix -ErrorAction SilentlyContinue
   $eligible = @($state.last_commit_changed_files | Where-Object {
-    $_ -notlike 'docs/*' -and
+    $isDoc = $_ -like 'docs/*'
+    $docsAllowed = $IncludeDocsInLastCommitBundle.IsPresent
+
+    ((-not $isDoc) -or $docsAllowed) -and
     $_ -notlike 'ai-input/*' -and
     $_ -notlike 'ai-output/*' -and
     $_ -notlike '.ctxvault/*'
@@ -117,7 +124,7 @@ if ($GenerateLastCommitBundle) {
     Write-Host "[skip] repomix not found in PATH." -ForegroundColor DarkYellow
   }
   elseif ($eligible.Count -eq 0) {
-    Write-Host "[skip] No eligible non-doc files in the last commit." -ForegroundColor DarkYellow
+    Write-Host "[skip] No eligible files matched the last-commit bundle policy." -ForegroundColor DarkYellow
   }
   else {
     $tmpConfig = Join-Path $env:TEMP "repomix-last-commit-$([System.IO.Path]::GetRandomFileName()).json"

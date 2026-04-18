@@ -177,7 +177,7 @@ $null = New-Item -ItemType Directory -Force -Path (Split-Path -Parent $outputPat
 $contextText = if ($config.context) { [string]$config.context } else { '(no context text set)' }
 $structureRoot = if ($config.structureRoot) { [string]$config.structureRoot } else { $null }
 [array]$include = if ($config.include) { @($config.include) } else { @() }
-[array]$listedOnly = if ($config.listedOnly) { @($config.listedOnly) } else { @() }
+[array]$excludeFromContent = if ($config.excludeFromContent) { @($config.excludeFromContent) } elseif ($config.listedOnly) { @($config.listedOnly) } else { @() }
 [array]$extraIgnore = @()
 if ($config.ignore -and $config.ignore.customPatterns) {
   $extraIgnore = @($config.ignore.customPatterns)
@@ -215,7 +215,7 @@ try {
       -IncludePatterns $include `
       -IncludeFiles $true `
       -IncludeDirectoryStructure $false `
-      -ExtraIgnorePatterns ($extraIgnore + $listedOnly)
+      -ExtraIgnorePatterns ($extraIgnore + $excludeFromContent)
 
     $tmpFiles.Add($cfg1)
     $tmpFiles.Add($cfg2)
@@ -240,8 +240,8 @@ try {
     $merged += ""
     $merged += "- structure root: `$structureRoot`"
     $merged += "- targeted include content generated from config"
-    if ($listedOnly.Count -gt 0) {
-      $merged += "- listed-only patterns were excluded from content to save tokens"
+    if ($excludeFromContent.Count -gt 0) {
+      $merged += "- exclude-from-content patterns were excluded from content to save tokens"
     }
     $merged += ""
     $merged += "## Structure pass"
@@ -262,7 +262,7 @@ try {
       -IncludePatterns $include `
       -IncludeFiles $true `
       -IncludeDirectoryStructure $true `
-      -ExtraIgnorePatterns ($extraIgnore + $listedOnly)
+      -ExtraIgnorePatterns ($extraIgnore + $excludeFromContent)
 
     $tmpFiles.Add($cfg)
 

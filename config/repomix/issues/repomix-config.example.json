@@ -7,7 +7,7 @@
     "src/app/app-routing.module.ts",
     "package.json"
   ],
-  "listedOnly": [
+  "excludeFromContent": [
     "src/assets/**/*.json",
     "src/**/*.spec.ts"
   ],

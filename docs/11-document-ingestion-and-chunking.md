@@ -51,6 +51,16 @@ documents-to-ingest/
   staging/
 ```
 
+## Scope of the bundled scripts
+
+The scripts published in this repository start from **normalized markdown**.
+
+That means the repository covers the pipeline from:
+
+- `normalized/` -> chunking -> refinement -> indexes -> staging -> ctxvault indexing
+
+Extraction from raw source documents is still part of the workflow, but it is intentionally left to tool-specific wrappers built around Docling, MarkItDown, Pandoc, or an equivalent converter.
+
 ## Step 1 - Collect source documents
 
 Put source files in `documents-to-ingest/incoming/`.
@@ -86,6 +96,8 @@ Normalization should fix or standardize:
 - path references for images if needed
 
 The output should be “master markdown” suitable for chunking.
+
+The bundled automation starts here.
 
 ## Step 4 - Chunk by semantic boundaries
 

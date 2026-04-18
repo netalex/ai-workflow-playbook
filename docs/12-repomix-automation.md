@@ -47,6 +47,8 @@ The repository includes a configurable pattern inspired by real-world usage:
 2. generate a **content** repomix for the precise files
 3. merge the two into a single issue-oriented context file
 
+The content pass may also exclude patterns that are useful for orientation but too expensive or noisy to inline in full.
+
 This keeps the shape of the repository visible without paying full token cost for every file.
 
 ## Config-driven bundles
@@ -62,6 +64,10 @@ A practical workflow is:
 3. encode that suggestion into a config file
 4. run `repomix-compose.ps1`
 5. place the output in `ai-input/`
+
+The example config uses `excludeFromContent` for patterns that should remain outside the content pass.
+
+That name is deliberate: it is clearer than `listedOnly`, which can imply behavior the current script does not implement.
 
 ## Git hooks in this repository
 

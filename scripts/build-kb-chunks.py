@@ -149,6 +149,7 @@ def build_frontmatter(chunk_id: str, chunk: Chunk) -> str:
         "---\n"
         f'chunk_id: "{chunk_id}"\n'
         f'source_file: "{chunk.source_file.as_posix()}"\n'
+        f'chunk_title: "{chunk.title.replace(chr(34), chr(39))}"\n'
         f"source_start_line: {chunk.start_line}\n"
         f"source_heading_level: {chunk.level}\n"
         f'source_heading_path: "{heading_path}"\n'
@@ -192,21 +193,21 @@ def write_manifest(path: Path, rows: list[dict[str, str | int]]) -> None:
     """Write the manifest CSV used by later pipeline steps."""
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
-      writer = csv.DictWriter(
-          handle,
-          fieldnames=[
-              "chunk_id",
-              "title",
-              "source_file",
-              "source_start_line",
-              "heading_level",
-              "heading_path",
-              "estimated_tokens",
-              "relative_path",
-          ],
-      )
-      writer.writeheader()
-      writer.writerows(rows)
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=[
+                "chunk_id",
+                "title",
+                "source_file",
+                "source_start_line",
+                "heading_level",
+                "heading_path",
+                "estimated_tokens",
+                "relative_path",
+            ],
+        )
+        writer.writeheader()
+        writer.writerows(rows)
 
 
 def main() -> None:

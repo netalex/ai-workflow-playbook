@@ -78,14 +78,16 @@ def main() -> None:
         text = read_text(path)
         frontmatter = parse_frontmatter(text)
         body = strip_frontmatter(text)
-        title = frontmatter.get("chunk_id", path.stem)
+        chunk_title = frontmatter.get("chunk_title", path.stem)
 
-        title_counter[title] += 1
+        title_counter[chunk_title] += 1
         summary_rows.append(
             {
                 "file": path.name,
                 "chunk_id": frontmatter.get("chunk_id", ""),
+                "chunk_title": chunk_title,
                 "source_file": frontmatter.get("source_file", ""),
+                "source_heading_path": frontmatter.get("source_heading_path", ""),
                 "estimated_tokens": frontmatter.get("estimated_tokens", ""),
                 "image_count": frontmatter.get("image_count", "0"),
                 "caption_count": frontmatter.get("caption_count", "0"),
@@ -94,7 +96,7 @@ def main() -> None:
         )
 
     duplicate_rows = [
-        {"title_or_chunk_id": key, "count": count}
+        {"chunk_title": key, "count": count}
         for key, count in sorted(title_counter.items(), key=lambda item: (-item[1], item[0]))
         if count > 1
     ]
@@ -102,13 +104,13 @@ def main() -> None:
     write_csv(
         output_dir / "chunk-summary.csv",
         summary_rows,
-        ["file", "chunk_id", "source_file", "estimated_tokens", "image_count", "caption_count", "body_chars"],
+        ["file", "chunk_id", "chunk_title", "source_file", "source_heading_path", "estimated_tokens", "image_count", "caption_count", "body_chars"],
     )
 
     write_csv(
         output_dir / "duplicate-titles.csv",
         duplicate_rows,
-        ["title_or_chunk_id", "count"],
+        ["chunk_title", "count"],
     )
 
     md_lines = [
@@ -119,13 +121,13 @@ def main() -> None:
         "",
         "## Largest chunks by character count",
         "",
-        "| File | Chunk ID | Body chars | Estimated tokens |",
-        "| --- | --- | ---: | ---: |",
+        "| File | Chunk ID | Chunk title | Body chars | Estimated tokens |",
+        "| --- | --- | --- | ---: | ---: |",
     ]
 
     for row in sorted(summary_rows, key=lambda item: int(item["body_chars"]), reverse=True)[:20]:
         md_lines.append(
-            f"| {row['file']} | {row['chunk_id']} | {row['body_chars']} | {row['estimated_tokens']} |"
+            f"| {row['file']} | {row['chunk_id']} | {row['chunk_title']} | {row['body_chars']} | {row['estimated_tokens']} |"
         )
 
     write_md(output_dir / "chunk-summary.md", md_lines)
