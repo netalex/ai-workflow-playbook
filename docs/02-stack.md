@@ -136,6 +136,11 @@ Keep the **role**, not the brand.
 Examples:
 
 - replace Claude Desktop with another reasoning layer with MCP client capabilities, long-context synthesis, and reusable workspace or project instructions
+  - possible examples: 5ire, Dive, or CodePilot
 - replace Cline with another editor execution layer that can edit files, run terminal commands, and respect repository boundaries
+  - possible examples: Continue or Kilo Code
 - replace CtxVault with another durable local memory system that supports pre-chunked knowledge, search, and explicit separation between running and historical material
+  - closest examples: Basic Memory, vault-mcp, or OpenMemory
+  - note: these are not exact drop-in replacements; you may need to recreate the pre-chunk discipline and the running-vs-historical split with your own conventions
 - replace Repomix with another packaging layer that can emit narrow, reviewable bundles instead of exposing the whole repository
+  - possible examples: GitIngest, Code2Prompt, or llmctx
