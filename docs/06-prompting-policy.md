@@ -86,6 +86,40 @@ Do not keep paying for the same instruction in every session.
 - demand file-by-file reasoning when the scope is broad
 - ask for uncertainty to be called out explicitly
 
+## Business context handoff
+
+Do not ask a code assistant to infer the business context from scratch.
+
+That is an anti-pattern because the assistant will usually optimize for local code patterns, naming guesses, and incomplete repository signals. The result is predictable:
+
+- invented or blurred business rules
+- weak prioritization between constraints
+- higher token cost caused by broad exploration
+- more review effort for the human
+
+Treat business context as a package, not a guess.
+
+### Provide this package explicitly
+
+- business goal
+- user or operator outcome
+- domain glossary
+- acceptance criteria
+- non-negotiable business rules
+- known technical constraints
+- minimal file or bundle scope
+- known unknowns or open questions
+
+### Good handoff pattern
+
+1. summarize the business objective in a short paragraph
+2. attach a focused repomix bundle or a vault note subset
+3. list the rules that must not be violated
+4. ask the assistant to call out assumptions explicitly
+5. review the assumptions before implementation
+
+This keeps the assistant grounded in real intent instead of letting it reverse-engineer intent from code alone.
+
 ## Bad prompting habits
 
 - “clean this up”

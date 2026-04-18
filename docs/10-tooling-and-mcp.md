@@ -158,8 +158,11 @@ Use extraction tools to turn source documents into markdown before chunking.
 
 Use Playwright MCP for browser-driven validation or reproducible UI exploration.
 
-Examples:
-- generating application screenshot lively updated during development
+### Examples
+
+- generating application screenshots that stay aligned with the current UI during development
+- reproducing a user flow in a controlled browser session
+- validating that a bug fix changed the observed behavior, not just the code
 
 ### Do not use it for
 

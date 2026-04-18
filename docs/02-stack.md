@@ -125,7 +125,6 @@ Avoid these:
 - leaving repeated prompts undocumented
 - storing changing project state only in chat
 - using expensive repomix bundles when a small vault subset would do
-- do not git versioning vaults (if they corrupts, there's no way to recover original chunks from ctxvault)
 
 ## Substitution rule
 
@@ -135,11 +134,7 @@ Keep the **role**, not the brand.
 
 Examples:
 
-- replace Claude Desktop with another reasoning layer with MCP client capabilities
-<!-- TODO: make examples -->
-- replace Cline with another editor execution layer
-<!-- TODO: make examples -->
-- replace CtxVault with another durable local memory system
-<!-- TODO: make examples -->
-- replace Repomix with another packaging layer that can preserve the same discipline
-<!-- TODO: make examples -->
+- replace Claude Desktop with another reasoning layer with MCP client capabilities, long-context synthesis, and reusable workspace or project instructions
+- replace Cline with another editor execution layer that can edit files, run terminal commands, and respect repository boundaries
+- replace CtxVault with another durable local memory system that supports pre-chunked knowledge, search, and explicit separation between running and historical material
+- replace Repomix with another packaging layer that can emit narrow, reviewable bundles instead of exposing the whole repository

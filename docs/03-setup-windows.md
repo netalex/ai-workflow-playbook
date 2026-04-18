@@ -101,7 +101,7 @@ Do not leave critical instructions trapped in GUI settings only.
 
 The example file in [config/claude/claude_desktop_config.example.json](../config/claude/claude_desktop_config.example.json) illustrates three important patterns:
 
-1. **filesystem MCP restricted to `ai-input/` and `ai-output` first**
+1. **filesystem MCP restricted to `ai-input/` first**
 2. **project-specific MCP servers declared explicitly**
 3. **CtxVault exposed through its own MCP command**
 
