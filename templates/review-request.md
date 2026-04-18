@@ -9,6 +9,7 @@ Focus on:
 - hidden regressions
 - unnecessary complexity
 - mismatches with the requested scope
+- token-cost implications if context packaging changed
 
 Output format:
 1. critical issues

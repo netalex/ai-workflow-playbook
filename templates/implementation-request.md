@@ -16,11 +16,12 @@ Constraints:
 - keep the diff reviewable
 - use existing project conventions
 - avoid placeholder code unless marked TODO
+- tell me if a smaller repomix bundle would be enough
 
 Expected output:
 1. implementation plan
 2. file-by-file changes
 3. final code
 4. verification checklist
-5. suggested commit message
+5. suggested Conventional Commit message
 ```

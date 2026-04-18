@@ -4,26 +4,29 @@
 
 ### Best when
 
-You know the target outcome but need help structuring the work.
+You know the outcome, but the implementation path still needs structure.
 
 ### Sequence
 
 1. define the deliverable
-2. identify the smallest relevant code area
-3. package focused context
-4. ask the reasoning tool for a plan
-5. move to the editor agent for implementation
-6. validate locally
-7. convert useful conclusions into docs or notes
-8. end on a clean commit-ready state
+2. define the acceptance criteria
+3. identify the smallest relevant code area
+4. generate a focused repomix or select a vault subset
+5. ask for analysis and options first
+6. choose the preferred option yourself
+7. execute in VS Code through Cline or Copilot
+8. validate locally
+9. preserve useful findings in docs or vaults
+10. end in a commit-ready state
 
 ### Good output from AI
 
 - implementation plan
-- touched files list
-- risk notes
-- test checklist
-- commit suggestion
+- touched-files list
+- trade-offs
+- code draft
+- validation checklist
+- Conventional Commit suggestion
 
 ## 2. Refactor
 
@@ -33,42 +36,43 @@ You want to improve structure without changing behavior.
 
 ### Sequence
 
-1. state the behavioral boundary clearly
-2. gather the current code slice
+1. state the behavioral boundary explicitly
+2. capture the current file slice
 3. ask for refactor options with trade-offs
-4. choose one path explicitly
-5. apply in small reviewable steps
-6. compare before/after behavior
-7. document any new architectural rule
+4. select one option
+5. implement in bounded steps
+6. validate behavior after each step
+7. record any new architectural rule or constraint
 
 ### Rule
 
-Never start a refactor with “clean this up” as the only instruction.
+Never start a refactor with only “clean this up.”
 
 ## 3. Bug investigation
 
 ### Best when
 
-You have symptoms, logs, or a failing flow.
+You have symptoms, logs, reproduction steps, or a failing test.
 
 ### Sequence
 
 1. capture the symptom
-2. capture reproduction steps
-3. isolate the likely subsystem
-4. give the AI only the relevant evidence
-5. ask for hypotheses ranked by probability
-6. validate one hypothesis at a time
-7. record the actual root cause once confirmed
+2. capture expected behavior
+3. capture actual behavior
+4. isolate the likely subsystem
+5. package only the relevant code and logs
+6. ask for ranked hypotheses
+7. verify the root cause locally
+8. record the confirmed cause in durable notes
 
 ### Good prompt shape
 
 - symptom
 - expected behavior
 - actual behavior
-- constraints
-- relevant files
-- logs or traces
+- reproduction steps
+- relevant logs
+- known exclusions
 
 ## 4. Documentation work
 
@@ -79,33 +83,65 @@ You need to transform scattered material into structured, durable knowledge.
 ### Sequence
 
 1. collect raw notes
-2. identify the target doc type
-3. ask for structure first, prose second
-4. review terminology
-5. publish only after cleanup and deduplication
+2. decide whether the target belongs in the repo or in a vault
+3. ask for structure first
+4. ask for prose second
+5. remove duplication
+6. convert stable text into versioned documentation
+7. turn repeated prompt patterns into templates or skills
 
 ### Useful outputs
 
 - ADR draft
 - architecture summary
 - setup guide
-- taskboard snapshot
+- migration runbook
+- taskboard
 - open questions list
+- reusable skill
 
 ## 5. Session recovery after interruption
 
 ### Sequence
 
 1. read the latest durable notes
-2. review the current git diff
-3. recover the original goal
-4. restate the next smallest step
-5. continue only after the state is understandable again
+2. inspect the current Git diff
+3. inspect the latest repomix output if relevant
+4. read the last taskboard or open questions note
+5. restate the original goal in one paragraph
+6. decide the next smallest step
+7. continue only after the scope is clear again
 
-## End-of-session checklist
+## 6. Document ingestion work
 
-- current task is named clearly
-- useful findings are written down
-- transient chat is distilled into durable notes
-- repository is left in a readable state
-- next action is obvious
+### Best when
+
+You have new source documents that must become queryable knowledge.
+
+### Sequence
+
+1. store the raw documents in an ingestion drop
+2. extract markdown using a controlled converter
+3. normalize the markdown
+4. chunk the documents
+5. refine the chunks
+6. build indexes and manifests
+7. manually spot-check the chunk corpus
+8. copy only pre-chunked material to staging
+9. index the staged content into the correct vault
+
+See [docs/11-document-ingestion-and-chunking.md](11-document-ingestion-and-chunking.md).
+
+## 7. Repeated prompting work
+
+### Rule
+
+If a prompt or instruction affects repeated work, do not keep paying for it as transient chat.
+
+Turn it into one of these:
+
+- repository template
+- vault note
+- skill
+- script comment
+- hook behavior

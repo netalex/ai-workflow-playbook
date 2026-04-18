@@ -2,66 +2,83 @@
 
 ## Stage 1 - Make the workflow visible
 
-Goal:
+### Goal
 
-- stop relying on memory alone
+Stop relying on memory alone.
 
-Actions:
+### Actions
 
 - write a README
+- document the stack roles
+- define the execution base
 - store recurring prompts
-- record the stack roles
-- define one default daily workflow
+- document one default daily workflow
 
 ## Stage 2 - Make the workflow repeatable
 
-Goal:
+### Goal
 
-- reduce improvisation
+Reduce improvisation.
 
-Actions:
+### Actions
 
-- standardize context packaging
-- create reusable templates
-- write session recovery notes
+- standardize repomix packaging
+- introduce `ai-input/`
+- write setup guides
+- create templates
 - define end-of-session rules
 
-## Stage 3 - Make the workflow portable
+## Stage 3 - Make the workflow durable
 
-Goal:
+### Goal
 
-- survive tool changes
+Stop losing knowledge across sessions.
 
-Actions:
+### Actions
 
-- separate roles from brands
-- keep prompts and notes outside vendor silos
-- document substitution paths
-- avoid hard-coding the workflow to one single app
+- introduce running-knowledge vaults
+- introduce historical-value vaults
+- define chunking and staging rules
+- convert repeated prompts into skills
 
-## Stage 4 - Make the workflow publishable
+## Stage 4 - Make the workflow automated
 
-Goal:
+### Goal
 
-- let another person understand and reuse it
+Reduce manual packaging effort.
 
-Actions:
+### Actions
 
-- clean internal references
-- add examples
-- add issue and PR templates
-- add a publication checklist
+- add repomix scripts
+- add Git hooks
+- add refresh scripts for `ai-input/`
+- add ingestion scripts for documents
 
-## Stage 5 - Make the workflow measurable
+## Stage 5 - Make the workflow publishable
 
-Goal:
+### Goal
 
-- decide whether the workflow is actually helping
+Let another person understand and reuse it.
 
-Possible metrics:
+### Actions
+
+- remove internal references
+- add references and acknowledgments
+- explain tool boundaries
+- explain human vs AI ownership
+- add a publishing checklist
+
+## Stage 6 - Make the workflow measurable
+
+### Goal
+
+Decide whether the workflow is actually helping.
+
+### Possible metrics
 
 - time to recover context
 - time to first useful draft
-- number of review cycles per change
-- number of decisions preserved in durable notes
-- ratio of useful AI output to discarded output
+- average repomix size
+- estimated token count per session
+- number of repeated prompts converted into skills
+- percentage of durable knowledge preserved outside chat

@@ -1,7 +1,5 @@
 # Prompting policy
 
-## Objective
-
 Use prompts as repeatable operational tools, not improvised one-off messages.
 
 ## Prompt layers
@@ -13,8 +11,10 @@ Stable instructions such as:
 - language conventions
 - coding preferences
 - review expectations
-- commit style
+- output structure
 - documentation tone
+
+These belong in templates, skills, or tool settings.
 
 ### 2. Project context
 
@@ -24,44 +24,32 @@ Semi-stable instructions such as:
 - framework constraints
 - repository conventions
 - team expectations
+- security boundaries
+- allowed directories
+
+These belong in repository docs, vault notes, or project-level prompt assets.
 
 ### 3. Task instructions
 
 Highly specific instructions such as:
 
 - deliverable
-- touched files
+- files in scope
 - constraints
-- validation needs
+- acceptance criteria
+- validation rule
 - output format
 
-## Good prompt traits
+These belong in the session itself.
 
-A good prompt is:
-
-- scoped
-- explicit about success
-- honest about uncertainty
-- clear on constraints
-- strict about output shape when needed
-
-## Bad prompt traits
-
-A bad prompt is:
-
-- vague
-- overloaded
-- contradictory
-- reliant on hidden prior context
-- missing acceptance criteria
-
-## Standard prompt skeleton
+## Default prompt skeleton
 
 ```text
-Role / mode
-Context
+Role or mode
 Task
+Context
 Constraints
+Files or bundle in scope
 Expected output
 Validation or review rule
 ```
@@ -72,19 +60,44 @@ For non-trivial work, prefer this order:
 
 1. ask for analysis
 2. ask for options
-3. choose an option
+3. select the option yourself
 4. ask for implementation
 5. ask for review
+6. convert stable findings into durable knowledge
 
 This reduces large unreviewed jumps.
 
 ## Prompt versioning rule
 
-If a prompt affects repeated work, store it in the repository or the vault.
+If a prompt affects repeated work, store it in one of these places:
 
-Examples:
+- repository template
+- running-knowledge vault
+- skill vault
 
-- system prompt variants
-- code review prompts
-- doc synthesis prompts
-- session kickoff prompts
+Do not keep paying for the same instruction in every session.
+
+## Good prompting habits
+
+- declare the scope boundary
+- give the AI the smallest useful context
+- state what not to touch
+- request trade-offs before code for non-trivial work
+- demand file-by-file reasoning when the scope is broad
+- ask for uncertainty to be called out explicitly
+
+## Bad prompting habits
+
+- “clean this up”
+- “fix the whole project”
+- “use whatever files you need”
+- “just make it better”
+- “remember this forever” without deciding whether it belongs in the repo or a vault
+
+## Skill rule
+
+If a prompt should affect many future tasks, it is probably not just a prompt anymore.
+
+It is probably a **skill**.
+
+See [templates/skill-template.md](../templates/skill-template.md) and [docs/14-ctxvault-and-skills.md](14-ctxvault-and-skills.md).

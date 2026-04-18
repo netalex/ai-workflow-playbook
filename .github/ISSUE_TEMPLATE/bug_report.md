@@ -1,38 +1,33 @@
 ---
 name: Bug report
-about: Report a problem in the playbook or helper scripts
-title: "[BUG] "
+about: Report a problem in the documented workflow or scripts
+title: "[bug] "
 labels: bug
-assignees: ''
+assignees: ""
 ---
 
-## Summary
+## Problem
 
-Describe the issue clearly.
+What is broken?
 
 ## Expected behavior
 
-What should have happened?
+What did you expect?
 
-## Actual behavior
-
-What happened instead?
-
-## Context
-
-- OS:
-- Shell:
-- Editor:
-- Primary AI tool:
-- Secondary AI tool:
-- Relevant script or doc:
-
-## Reproduction steps
+## Reproduction
 
 1.
 2.
 3.
 
+## Affected area
+
+- [ ] docs
+- [ ] templates
+- [ ] scripts
+- [ ] hooks
+- [ ] config examples
+
 ## Notes
 
-Add screenshots, logs, or examples if useful.
+Add logs, errors, or screenshots if useful.

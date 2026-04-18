@@ -1,0 +1,26 @@
+{
+  "context": "Example issue bundle focused on a small feature area with a structure-only pass and a targeted content pass.",
+  "structureRoot": "src",
+  "include": [
+    "src/app/feature-a/**/*",
+    "src/app/shared/models/**/*.ts",
+    "src/app/app-routing.module.ts",
+    "package.json"
+  ],
+  "listedOnly": [
+    "src/assets/**/*.json",
+    "src/**/*.spec.ts"
+  ],
+  "ignore": {
+    "customPatterns": [
+      "node_modules/**",
+      "dist/**",
+      "coverage/**",
+      "docs/**",
+      ".ctxvault/**"
+    ]
+  },
+  "output": {
+    "filePath": "ai-input/20-code/example-issue-bundle.md"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "filesystem-safe": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:\\Users\\<you>\\Work\\repos\\example-repo\\ai-input",
+        "C:\\Users\\<you>\\Work\\repos\\example-repo\\ai-output"
+      ]
+    },
+    "ctxvault": {
+      "command": "ctxvault-mcp"
+    },
+    "repomix": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "repomix",
+        "--mcp"
+      ]
+    }
+  },
+  "preferences": {
+    "coworkScheduledTasksEnabled": false,
+    "sidebarMode": "chat"
+  }
+}

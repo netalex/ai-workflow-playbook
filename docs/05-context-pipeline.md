@@ -1,83 +1,141 @@
 # Context pipeline
 
-## Why context packaging matters
+## Purpose
 
-The fastest way to degrade AI output is to provide too much irrelevant material.
+The context pipeline exists to answer one question well:
 
-This workflow prefers **curated context** over repository dumping.
+**What is the smallest useful context that still lets the AI do good work?**
 
-## Pipeline
+This playbook uses two main lanes:
 
-```text
-Repository -> Focused extraction -> Short problem statement -> AI reasoning -> Controlled implementation
-```
+1. **repository context packaging** with repomix
+2. **document knowledge packaging** with pre-chunked vault material
 
-## What to include
+## Core rule
 
-Include only what the model needs to answer well:
+Do not treat raw files, raw repositories, and raw documents as the default input format for LLMs.
 
-- the target files
-- directly related interfaces or schemas
-- relevant config
-- failing tests or logs
-- a precise problem statement
-- constraints and success criteria
+Prepare context first.
 
-## What to avoid
+## Lane A: repository context
 
-Avoid including:
+Use this lane when the task is code-centric.
 
-- huge unrelated folders
-- generated files
-- lockfiles unless dependency problems are the task
-- old notes with contradictory decisions
-- screenshots without explanatory text
+### Preferred order
 
-## Durable vs transient context
+1. collect the task boundary
+2. identify the active module or files
+3. generate a focused repomix
+4. place the result in `ai-input/`
+5. expose only the staged bundle to the reasoning tool when possible
 
-### Durable
-Store in repository docs or a vault:
-- architectural decisions
-- current taskboard
-- recurring operational notes
-- stable prompts
-- known pitfalls
+### Why this helps
+
+- smaller prompts
+- repeatable context
+- easier review
+- less accidental leakage
+- lower token cost
+
+## Lane B: document knowledge context
+
+Use this lane when the task depends on functional, architectural, procedural, or historical documentation.
+
+### Preferred order
+
+1. extract markdown from source documents
+2. normalize structure
+3. chunk by headings and semantic boundaries
+4. refine the chunk corpus
+5. build indexes and manifests
+6. stage the pre-chunked output
+7. index only that staged output into the vault
+
+### Why this helps
+
+- better retrieval quality
+- better chunk identity
+- less duplication
+- better control over stale or immutable material
+- lower token cost during retrieval
+
+## Material classes
 
 ### Transient
-Use only for the active task:
-- temporary logs
-- work-in-progress prompts
-- experimental diffs
-- disposable bundles
 
-## A good context bundle should answer
+Transient material is short-lived and disposable.
 
-- what is the task?
-- what is the current behavior?
-- what files matter?
-- what constraints apply?
-- what does success look like?
+Examples:
 
-## Practical rule of thumb
+- scratch prompts
+- one-off summaries
+- temporary exports
+- ad-hoc bundles for a single issue
 
-If the receiving model needs five minutes just to understand your context package, the package is probably too big.
+### Durable
 
-## Preferred artifact types
+Durable material should survive the session.
 
-- markdown summaries
-- reduced file trees
-- selected code slices
-- plain-text bundles
-- short structured prompts
+Examples:
 
-## Handoff pattern
+- README content
+- operating notes
+- taskboards
+- open questions
+- skills
+- normalized chunk corpus
+- commit-ready docs
 
-When moving from reasoning to execution, pass:
+## Durable destinations
 
-1. the agreed plan
-2. the scope boundary
-3. the files to touch
-4. the acceptance checks
-5. any non-negotiable style rules
+Choose one deliberately.
 
-That handoff is where many workflows fail. Make it explicit.
+### Repository docs
+
+Use when the content is:
+
+- part of the public or team-visible workflow
+- versioned with the code
+- useful to other humans
+
+### Running-knowledge vault
+
+Use when the content changes often.
+
+Examples:
+
+- current taskboard
+- current snapshot
+- in-progress operating notes
+- evolving prompt rules
+
+### Historical-value vault
+
+Use when the content should remain queryable but should not mutate.
+
+Examples:
+
+- obsolete code snapshots
+- archived designs
+- immutable external documents
+- prior-generation system references
+
+See [docs/14-ctxvault-and-skills.md](14-ctxvault-and-skills.md).
+
+## Filesystem MCP boundary
+
+A practical safety pattern is:
+
+- repomix or stage the needed input
+- place it in `ai-input/`
+- expose only `ai-input/` to filesystem MCP
+
+This reduces both token cost and accidental overexposure.
+
+## Success condition
+
+The pipeline is working when you can answer:
+
+- why this context was chosen
+- what was deliberately excluded
+- where durable knowledge will be stored afterward

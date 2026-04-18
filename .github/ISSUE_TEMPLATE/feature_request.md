@@ -1,32 +1,29 @@
 ---
 name: Feature request
-about: Suggest an improvement to the workflow playbook
-title: "[FEATURE] "
+about: Propose a workflow improvement
+title: "[feature] "
 labels: enhancement
-assignees: ''
+assignees: ""
 ---
 
-## Problem
+## Goal
 
-What problem are you trying to solve?
+What repeated friction or missing capability should this solve?
 
 ## Proposed change
 
-What do you want to add or improve?
+Describe the improvement.
 
 ## Why it matters
 
-Why is this useful in real work?
+Explain the impact on:
 
-## Scope
+- workflow quality
+- reviewability
+- token cost
+- durable knowledge
+- automation
 
-- [ ] documentation only
-- [ ] templates
-- [ ] scripts
-- [ ] repository structure
-- [ ] decision matrix
-- [ ] other
+## Possible implementation notes
 
-## Notes
-
-Add examples, references, or draft text if available.
+Add examples or constraints if you have them.

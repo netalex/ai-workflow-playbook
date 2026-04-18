@@ -5,44 +5,44 @@
 Pick one:
 
 - `ai-workflow-playbook`
+- `vscode-first-ai-workflow`
 - `human-in-the-loop-ai-workflow`
-- `practical-ai-dev-workflow`
-- `alessandro-ai-workflow`
+- `token-aware-ai-dev-workflow`
 
 ## Suggested short description
 
-A practical, publishable AI workflow for software delivery, built around curated context, durable project memory, and human-reviewed execution.
+A VS Code-first, human-in-the-loop AI workflow for software delivery, durable memory, token-aware context packaging, and document ingestion.
 
 ## Suggested topics
 
 - ai-workflow
-- developer-tools
-- prompt-engineering
-- knowledge-management
-- software-engineering
-- workflow
 - vscode
 - claude
+- cline
 - copilot
-- documentation
+- ctxvault
+- repomix
+- mcp
+- knowledge-management
+- prompt-engineering
+- software-engineering
 
 ## Suggested first release title
 
-`v0.1.0 - Initial public playbook`
+`v0.2.0 - workflow, chunking, and automation`
 
 ## Suggested release notes
 
-Initial public version of the workflow playbook, including:
+Initial public version of the playbook with:
 
-- repository structure
-- setup guidance
-- daily operating workflows
-- context packaging guidance
-- prompting policy
-- publishing checklist
-- reusable templates
-- helper PowerShell scripts
+- VS Code-first workflow guidance
+- Claude Desktop configuration example
+- document ingestion and chunking pipeline
+- token-aware repomix automation
+- Git hooks for context refresh
+- ctxvault knowledge and skill patterns
+- reusable templates and helper scripts
 
-## Suggested pinned README opening line
+## Suggested pinned opening line
 
-A documentation-first repository that turns an AI-assisted development workflow into a repeatable, reviewable, and publishable system.
+A documentation-first repository that turns AI-assisted development into a repeatable, reviewable, token-aware workflow.

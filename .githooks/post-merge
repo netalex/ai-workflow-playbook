@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+# Refresh ai-input after merges to avoid stale branch snapshots.
+
+if [ "${AI_WORKFLOW_SKIP_HOOKS}" = "1" ]; then
+  exit 0
+fi
+
+if command -v pwsh >/dev/null 2>&1; then
+  pwsh ./scripts/refresh-ai-input.ps1 || true
+fi
+
+exit 0

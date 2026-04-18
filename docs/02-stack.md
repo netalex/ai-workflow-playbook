@@ -2,13 +2,16 @@
 
 ## Reference stack
 
+### Base
+
+- VS Code
+
 ### Reasoning
 
 - Claude Desktop
 
 ### In-editor execution
 
-- VS Code
 - Cline
 - GitHub Copilot
 
@@ -20,95 +23,119 @@
 
 - Repomix
 
-### Optional tool adapters
+### Optional extraction and conversion tools
+
+- Docling
+- MarkItDown
+- Pandoc
+
+### Optional MCP servers
 
 - filesystem MCP
+- repomix MCP
 - markitdown MCP
-- DebugMCP
 - Playwright MCP
-- GitHub integrations
-- framework-specific MCP servers (i.e. Angulr-cli MCP for angular best practices retreival and application and code conformity)
+- DebugMCP
+- framework-specific MCP servers
+- GitHub or Git provider integrations
 
 ## Why this split works
 
 Each tool is used for what it does best.
 
+### VS Code
+
+Best for:
+
+- editing and review
+- Git operations
+- running tests
+- terminal work
+- managing local automation
+- acting as the common base between multiple AI assistants
+
 ### Claude Desktop
 
 Best for:
 
-- long-form reasoning
+- cross-file reasoning
 - architecture
-- synthesis across sources
-- prompt-heavy work
-- turning scattered notes into coherent documents
+- prompt-heavy synthesis
+- drafting durable docs
+- turning mixed notes into coherent operating guidance
 
 ### Cline
 
 Best for:
 
-- bounded implementation inside the repo
-- surgical edits
-- terminal-aware iteration
-- local validation loops
+- bounded implementation
+- file edits with local feedback
+- terminal-aware work
+- task execution inside a controlled workspace
+- workflows that benefit from MCP tools
 
 ### GitHub Copilot
 
 Best for:
 
-- fast inline completions
-- lightweight chat in the editor
-- quick transformations
-- low-friction coding support
+- inline completion
+- lightweight chat
+- small transformations
+- local code assistance with minimal overhead
 
 ### CtxVault
 
 Best for:
 
-- persistent project memory
-- operational notes
-- snapshots
-- reusable context outside chat silos
+- persistent knowledge
+- project snapshots
+- taskboards
+- open questions
+- historical reference material
+- custom skills that should survive chat resets
 
 ### Repomix
 
 Best for:
 
-- targeted context extraction
-- building compact inputs for AI tools
-- avoiding raw repository overload
+- packaging only the needed repository slice
+- producing repeatable context bundles
+- separating structure-only context from full file content
+- reducing token usage compared with raw repository exposure
 
-## Tool ownership model
+## Default ownership model
 
-Use this default assignment:
-
-| Need                      | Primary owner  | Secondary       |
-| ------------------------- | -------------- | --------------- |
-| architectural reasoning   | Claude Desktop | none            |
-| code execution in repo    | Cline          | Copilot         |
-| quick local coding help   | Copilot        | Cline           |
-| long-lived project memory | CtxVault       | repository docs |
-| focused packaging         | Repomix        | manual bundles  |
+| Need                    | Primary owner    | Secondary       |
+| ----------------------- | ---------------- | --------------- |
+| architectural reasoning | Claude Desktop   | repository docs |
+| in-repo execution       | Cline            | Copilot         |
+| quick local coding help | Copilot          | Cline           |
+| durable memory          | CtxVault         | repository docs |
+| focused packaging       | Repomix          | manual bundles  |
+| local validation        | VS Code terminal | shell scripts   |
 
 ## Anti-patterns
 
 Avoid these:
 
-- using one tool for every task
-- asking the editor agent to infer the whole project from scratch
-- storing durable project knowledge only in chat
-- mixing strategic reasoning and large destructive edits in one step
-- treating AI output as authoritative without review
+- using one assistant for everything
+- indexing raw documents directly into a vault
+- giving filesystem MCP unrestricted repository access by default
+- asking the code assistant to infer business context from scratch
+- leaving repeated prompts undocumented
+- storing changing project state only in chat
+- using expensive repomix bundles when a small vault subset would do
+- do not git versioning vaults (if they corrupts, there's no way to recover original chunks from ctxvault)
 
 ## Substitution rule
 
 The workflow should survive tool changes.
 
-If you replace one tool, preserve the **role**, not the brand.
+Keep the **role**, not the brand.
 
-Example:
+Examples:
 
-- replace Claude Desktop -> keep a reasoning layer
-- replace Cline -> keep an execution layer
-- replace CtxVault -> keep durable memory
-- replace Repomix -> keep focused context packaging
+- replace Claude Desktop with another reasoning layer with MCP client
+- replace Cline with another editor execution layer
+- replace CtxVault with another durable local memory system
+- replace Repomix with another packaging layer that can preserve the same discipline

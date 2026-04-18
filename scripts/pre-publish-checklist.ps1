@@ -1,3 +1,23 @@
+<#
+.SYNOPSIS
+Runs a small repository sanity check before public publication.
+
+.DESCRIPTION
+This script does not try to prove the repository is perfectly safe.
+It simply catches common misses early:
+
+- missing top-level files
+- missing key directories
+- missing docs or templates that the README links to
+
+It is intentionally conservative and easy to audit.
+
+.NOTES
+Run from the repository root:
+  pwsh ./scripts/pre-publish-checklist.ps1
+#>
+
+Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Continue'
 
 Write-Host "Repository pre-publish quick check" -ForegroundColor Cyan
@@ -9,14 +29,19 @@ $requiredFiles = @(
   'CONTRIBUTING.md',
   'CHANGELOG.md',
   '.editorconfig',
-  '.gitignore'
+  '.gitignore',
+  'config/claude/claude_desktop_config.example.json',
+  'config/repomix/issues/repomix-config.example.json'
 )
 
 $requiredDirs = @(
   '.github',
+  '.githooks',
   'docs',
   'templates',
-  'scripts'
+  'scripts',
+  'ai-input',
+  'config'
 )
 
 foreach ($file in $requiredFiles) {
@@ -39,7 +64,8 @@ foreach ($dir in $requiredDirs) {
 
 Write-Host ""
 Write-Host "Manual reminders:" -ForegroundColor Cyan
-Write-Host "- Review prompts for confidential wording"
-Write-Host "- Remove private URLs and local paths"
-Write-Host "- Confirm license choice"
-Write-Host "- Confirm the repository name and description"
+Write-Host "- Review prompts and skills for confidential wording"
+Write-Host "- Review config examples for personal filesystem paths"
+Write-Host "- Remove proprietary documents and screenshots"
+Write-Host "- Confirm acknowledgments and references render correctly"
+Write-Host "- Confirm the chosen license still matches your publication intent"

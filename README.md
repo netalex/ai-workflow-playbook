@@ -1,49 +1,55 @@
 # AI Workflow Playbook
 
-An opinionated, human-in-the-loop workflow for using AI across documentation, coding, refactoring, debugging, and repository hygiene.
+An opinionated, human-in-the-loop workflow for using AI across documentation, coding, refactoring, debugging, knowledge management, and repository hygiene.
 
-This repository documents a practical stack centered on:
+This playbook is built around one primary idea: **use VS Code as the execution base, keep durable knowledge outside chat silos, and optimize every step for reviewability and token efficiency**.
 
-- **Claude Desktop** for deep reasoning and project-level context
-- **VS Code** for day-to-day development
-- **Cline** and/or **GitHub Copilot** for in-editor execution
-- **CtxVault** for durable local knowledge management
-- **Repomix** for focused context bundles
-- Optional MCP servers for filesystem access, debugging, browser automation, and domain-specific tooling
+## What this repository covers
 
-The workflow is designed for people who want strong AI assistance **without surrendering architectural control**.
+- a **VS Code-first** operating model
+- a split between **reasoning**, **execution**, **memory**, and **context packaging**
+- a full **document ingestion and chunking pipeline**
+- **CtxVault** as durable local memory for both knowledge and custom skills
+- **Repomix** as the main context-packaging layer
+- **Claude Desktop**, **Cline**, **GitHub Copilot**, and **MCP servers** used in well-defined roles
+- **PowerShell, Python, and Git hook automation** for repeatable daily work
+- a strong bias toward **lower token cost**, smaller bundles, and deliberate context curation
 
 ## Why this exists
 
-Most AI workflow write-ups are too generic. This one is built around a stricter model:
+Many AI workflow write-ups stop at “use a chat app and an editor plugin.” That is not enough for real projects.
 
-- the human stays accountable for decisions
-- context is curated, not dumped
-- maintainability beats flashy shortcuts
-- repositories remain readable by humans first
-- prompts are treated as operational assets
-- every stable step should be documentable, reviewable, and commit-ready
+This repository documents a stricter model:
 
-## Who this is for
+1. the human stays accountable for architecture and acceptance
+2. context is **prepared**, not dumped
+3. durable knowledge lives in **versioned docs or vaults**
+4. code assistants work best when the context is **bounded and pre-filtered**
+5. token cost is a first-class concern, not an afterthought
+6. repeated work should become a **template, script, hook, or skill**
 
-This playbook is especially useful if you:
+## Core priorities
 
-- work on medium or large codebases
-- need repeatable AI-assisted development patterns
-- want to reduce context drift across sessions
-- use Windows or mixed local tooling
-- care about long-lived project memory
-- prefer **AI as a senior assistant**, not as an autonomous agent
+1. **Correctness before speed**
+2. **Maintainability before cleverness**
+3. **Token reduction before convenience dumping**
+4. **Curated context before full-repo exposure**
+5. **Human review before acceptance**
+6. **Durable notes before chat memory**
+7. **Small reviewable diffs before giant rewrites**
 
-## Core principles
+## Operating model in one view
 
-1. **Work backward from the deliverable**
-2. **Feed only the context that matters**
-3. **Prefer reviewable diffs over giant rewrites**
-4. **Separate transient chat from durable knowledge**
-5. **Keep prompts and procedures versioned**
-6. **Treat AI outputs as drafts until verified**
-7. **Standardize the handoff from reasoning to code**
+```text
+Task
+  -> choose the smallest useful context
+  -> package it with repomix or pre-chunked vault material
+  -> reason in Claude Desktop
+  -> execute in VS Code through Cline or Copilot
+  -> validate locally
+  -> preserve useful knowledge in docs or ctxvault
+  -> commit with Conventional Commits best practices
+```
 
 ## Repository structure
 
@@ -57,85 +63,177 @@ This playbook is especially useful if you:
 ├── .gitignore
 ├── .github/
 │   ├── ISSUE_TEMPLATE/
-│   │   ├── bug_report.md
-│   │   └── feature_request.md
-│   └── pull_request_template.md
+│   ├── pull_request_template.md
+├── .githooks/
+│   ├── post-checkout
+│   ├── post-commit
+│   └── post-merge
+├── ai-input/
+│   └── README.md
+├── config/
+│   ├── claude/
+│   │   └── claude_desktop_config.example.json
+│   └── repomix/
+│       └── issues/
+│           └── repomix-config.example.json
 ├── docs/
 │   ├── 01-overview.md
 │   ├── 02-stack.md
 │   ├── 03-setup-windows.md
+│   ├── 03-setup-linux.md
 │   ├── 04-daily-workflows.md
 │   ├── 05-context-pipeline.md
 │   ├── 06-prompting-policy.md
 │   ├── 07-publishing-checklist.md
 │   ├── 08-adoption-roadmap.md
-│   └── 09-github-metadata.md
-├── templates/
-│   ├── system-prompt.md
-│   ├── session-kickoff.md
-│   ├── implementation-request.md
-│   ├── review-request.md
-│   └── commit-style.md
-└── scripts/
-    ├── check-tools.ps1
-    └── pre-publish-checklist.ps1
+│   ├── 09-github-metadata.md
+│   ├── 10-tooling-and-mcp.md
+│   ├── 11-document-ingestion-and-chunking.md
+│   ├── 12-repomix-automation.md
+│   ├── 13-human-vs-ai.md
+│   ├── 14-ctxvault-and-skills.md
+│   └── 15-token-cost-policy.md
+├── scripts/
+│   ├── build-chunk-index.py
+│   ├── build-kb-chunks.py
+│   ├── check-tools.ps1
+│   ├── install-git-hooks.ps1
+│   ├── pre-publish-checklist.ps1
+│   ├── refresh-ai-input.ps1
+│   ├── refine-kb-chunks.py
+│   ├── repomix-compose.ps1
+│   ├── run-ingestion-pipeline.ps1
+│   ├── switch-claude-profile.ps1
+│   ├── sync-staging-to-ctxvault.ps1
+│   └── test-ingestion-prerequisites.ps1
+└── templates/
+    ├── commit-style.md
+    ├── implementation-request.md
+    ├── review-request.md
+    ├── session-kickoff.md
+    ├── skill-template.md
+    └── system-prompt.md
 ```
 
 ## Quick start
 
-1. Read [docs/01-overview.md](docs/01-overview.md)
-2. Map your local toolchain with [docs/02-stack.md](docs/02-stack.md)
-3. Configure the environment with [docs/03-setup-windows.md](docs/03-setup-windows.md)
-4. Adopt one workflow from [docs/04-daily-workflows.md](docs/04-daily-workflows.md)
-5. Version your prompts using [templates/](templates/)
-6. Run the checks in [docs/07-publishing-checklist.md](docs/07-publishing-checklist.md)
+1. Read [docs/01-overview.md](docs/01-overview.md).
+2. Treat [docs/02-stack.md](docs/02-stack.md) as the architectural map.
+3. Set up the environment from [docs/03-setup-windows.md](docs/03-setup-windows.md) or [docs/03-setup-linux.md](docs/03-setup-linux.md).
+4. Configure Claude Desktop with the example in [config/claude/claude_desktop_config.example.json](config/claude/claude_desktop_config.example.json).
+5. Install the Git hooks with `pwsh ./scripts/install-git-hooks.ps1`.
+6. Read [docs/11-document-ingestion-and-chunking.md](docs/11-document-ingestion-and-chunking.md) before indexing any vault.
+7. Read [docs/12-repomix-automation.md](docs/12-repomix-automation.md) before exposing repository context to an LLM.
 
 ## Recommended operating rhythm
 
-### **Before a session**
+### Before a session
 
 - clarify the deliverable
-- fetch only the relevant project context
-- define the success conditions
+- identify the smallest relevant code or document slice
+- decide what belongs in the repository, what belongs in a vault, and what should stay transient
+- prepare a focused repomix or pre-chunked vault subset
 
-### **During a session**
+### During a session
 
-- keep the AI focused on one bounded task
-- review partial outputs early
-- preserve useful decisions in durable notes
+- keep the AI on one bounded task
+- ask for analysis before implementation when the work is non-trivial
+- expose only the directories needed for the task
+- capture stable findings as notes, docs, or skills
 
-### **At the end of a session**
+### At the end of a session
 
-- convert useful chat into repository assets
-- update docs, prompts, and operational notes
-- produce a clean commit or a clean stopping point
+- refresh `ai-input/` if needed
+- promote durable output into docs, code, or vaults
+- update running knowledge
+- leave a clean stopping point and a Conventional Commit-ready summary
 
-## What makes this workflow different
+## Human vs AI
 
-This is not a “one model replaces the team” setup.
+The separation is deliberate.
 
-It is a **layered workflow**:
+### The human owns
 
-- one tool for deep thinking
-- one tool for code editing
-- one system for durable memory
-- one pipeline for targeted context preparation
-- one human owner making final decisions
+- deliverable definition
+- architecture decisions
+- approval of prompts, skills, and hooks
+- acceptance criteria
+- review of code, docs, and generated context
+- final commit and publish decision
 
-That separation keeps the stack understandable and replaceable.
+### The AI owns
 
-## Publishing notes
+- synthesis
+- first-draft structure
+- bounded code transformations
+- summarization
+- bundle suggestions
+- proposed task decomposition
+- candidate prompts, skills, and commit messages
 
-This repository is intentionally documentation-first so it can be published as-is, forked, or adapted to a team-specific or company-specific workflow.
+See [docs/13-human-vs-ai.md](docs/13-human-vs-ai.md).
 
-Before publishing publicly, review:
+## Token cost is part of the architecture
+
+This workflow assumes token waste is a real operational cost.
+
+That changes the design:
+
+- vaults contain **only pre-chunked material**
+- large documents are normalized and chunked before indexing
+- repomix is configured, not sprayed over the whole repository
+- filesystem MCP can be restricted to `ai-input/` and a few safe directories
+- repeated work becomes scripts, hooks, or skills instead of repeated prompting
+
+See [docs/15-token-cost-policy.md](docs/15-token-cost-policy.md).
+
+## Security boundary: use `ai-input/`
+
+A useful hardening pattern is to expose only a dedicated `ai-input/` directory to filesystem MCP, instead of the whole repository.
+
+That gives you three benefits:
+
+1. less accidental repository exposure
+2. lower token usage
+3. better control over what the LLM is allowed to read directly
+
+The rest of the repository can still be reachable indirectly through repomix bundles, staged docs, or curated vault material.
+
+See [ai-input/README.md](ai-input/README.md).
+
+## Acknowledgments and references
+
+This playbook stands on top of tools and open work created by others.
+
+- **CtxVault** by **Filippo Venturini**: local semantic memory for knowledge and skills  
+  <https://github.com/Filippo-Venturini/ctxvault>
+- **Repomix** by **Yamada Shota and contributors**: repository packaging for AI-friendly context  
+  <https://repomix.com/>  
+  <https://github.com/yamadashy/repomix>
+- **Cline**: open coding agent inside the editor  
+  <https://cline.bot/>  
+  <https://github.com/cline/cline>
+- **GitHub Copilot**: inline and chat-based coding assistance in VS Code  
+  <https://github.com/features/copilot>
+- **Claude Desktop**: reasoning workspace and MCP host  
+  <https://claude.ai/download>
+- **Model Context Protocol (MCP)**: open protocol for connecting AI applications to tools and data  
+  <https://modelcontextprotocol.io/>
+
+The workflow described here is an integration pattern built around those tools. The value is in the orchestration, not in pretending the underlying tools came from nowhere.
+
+## Publishing note
+
+This repository is intentionally generic and agnostic.
+
+Before publishing your own fork publicly, review:
 
 - personal names
 - internal URLs
-- company-specific paths
-- secrets or tokens
-- proprietary prompt text
-- screenshots containing internal information
+- company paths
+- example config paths
+- hidden proprietary prompt text
+- documents, screenshots, and bundles that may contain private information
 
 See [docs/07-publishing-checklist.md](docs/07-publishing-checklist.md).
 

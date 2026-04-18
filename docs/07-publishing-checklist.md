@@ -6,26 +6,31 @@ Use this before making the repository public.
 
 - [ ] remove tokens, secrets, cookies, and keys
 - [ ] remove private URLs or replace them with placeholders
-- [ ] remove internal screenshots
-- [ ] replace company-specific filesystem paths if needed
+- [ ] remove internal screenshots or diagrams
+- [ ] replace personal filesystem paths where needed
 - [ ] review prompt files for confidential wording
 - [ ] ensure no proprietary code is embedded in examples
+- [ ] review example `claude_desktop_config.json` paths
+- [ ] review hook scripts for local-path assumptions
 
 ## Clarity
 
-- [ ] README explains the workflow in under five minutes
-- [ ] repository structure is understandable
-- [ ] examples are clearly marked as examples
+- [ ] README explains the workflow quickly
+- [ ] VS Code is clearly identified as the execution base
+- [ ] token-cost priorities are explicit
 - [ ] docs do not assume hidden context
-- [ ] acronyms are explained at least once
+- [ ] each script is documented in the repository
+- [ ] vault types are explained clearly
+- [ ] human vs AI responsibility is explicit
 
 ## Maintainability
 
-- [ ] durable guidance is in docs, not only in issues
-- [ ] templates are reusable
-- [ ] scripts are small and understandable
-- [ ] naming is consistent across files
-- [ ] changelog has an initial release entry
+- [ ] repeated instructions live in templates, skills, or docs
+- [ ] scripts are commented
+- [ ] naming is consistent
+- [ ] links between docs resolve correctly
+- [ ] the changelog reflects the real content
+- [ ] hook automation has an opt-out path
 
 ## Public-readiness
 
@@ -33,10 +38,11 @@ Use this before making the repository public.
 - [ ] contribution guidelines exist
 - [ ] issue templates exist
 - [ ] pull request template exists
-- [ ] personal branding is intentional, not accidental
+- [ ] acknowledgments and references are included
+- [ ] no project-specific names remain in the generic playbook
 
 ## Final manual pass
 
-Read the repository as if you were an external developer seeing it for the first time.
+Read the repository as if you were an external engineer seeing it for the first time.
 
-If the workflow depends on knowledge that only exists in your head, publish is not done yet.
+If the workflow still depends on knowledge that exists only in your head, publishing is not done yet.
