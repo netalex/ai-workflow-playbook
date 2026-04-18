@@ -41,7 +41,21 @@ Stop losing knowledge across sessions.
 - define chunking and staging rules
 - convert repeated prompts into skills
 
-## Stage 4 - Make the workflow automated
+## Stage 4 - Make the workflow work on high-value document sets
+
+### Goal
+
+Process official and sensitive sources without contaminating the normal project surface.
+
+### Actions
+
+- introduce document workbench patterns
+- add DOCX preflight QA
+- separate probe extraction from master extraction
+- treat screenshot-heavy evidence as first-class knowledge when needed
+- add conflict registers for source-vs-doc reconciliation
+
+## Stage 5 - Make the workflow automated
 
 ### Goal
 
@@ -53,8 +67,9 @@ Reduce manual packaging effort.
 - add Git hooks
 - add refresh scripts for `ai-input/`
 - add ingestion scripts for documents
+- add extraction wrappers for official source drops
 
-## Stage 5 - Make the workflow publishable
+## Stage 6 - Make the workflow publishable
 
 ### Goal
 
@@ -68,7 +83,7 @@ Let another person understand and reuse it.
 - explain human vs AI ownership
 - add a publishing checklist
 
-## Stage 6 - Make the workflow measurable
+## Stage 7 - Make the workflow measurable
 
 ### Goal
 
@@ -82,3 +97,4 @@ Decide whether the workflow is actually helping.
 - estimated token count per session
 - number of repeated prompts converted into skills
 - percentage of durable knowledge preserved outside chat
+- percentage of official-source artifacts promoted only after explicit review

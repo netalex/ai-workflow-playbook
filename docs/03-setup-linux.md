@@ -16,6 +16,16 @@ Install and verify:
 - Repomix
 - CtxVault via `uv tool`
 
+## Official-document extras
+
+If you plan to process complex local document sets, add:
+
+- Pandoc
+- Docling
+- ImageMagick or another local image conversion tool
+- Mammoth through `npm` or `npx` when you need semantic DOCX QA
+- LibreOffice Writer or another local visual office suite for QA only
+
 ## Verify the toolchain
 
 ```bash
@@ -26,6 +36,8 @@ python3 --version
 uv --version
 code --version
 pwsh --version
+pandoc --version
+docling --help
 ```
 
 ## Install Repomix
@@ -54,6 +66,7 @@ ctxvault-mcp --help
   repomix-output/
   vault-staging/
   documents-to-ingest/
+  document-workbenches/
 ```
 
 ## VS Code and WSL
@@ -88,6 +101,8 @@ Expose only what is needed:
 
 Avoid giving the host tool a blind view of the entire Linux workspace.
 
+The same logic applies to document workbenches: keep the raw workbench local and expose only reviewed exports.
+
 ## Git hooks
 
 If the repository is Linux-native, the bundled shell hooks in `.githooks/` work directly.
@@ -111,6 +126,7 @@ git config core.hooksPath .githooks
 - using `python` vs `python3`
 - different `repomix` or `ctxvault` locations between host and WSL
 - storing large bundles on synced folders with slow I/O
+- forgetting that a raw official source drop may deserve a workbench before it belongs in the main repo
 
 ## Good default
 

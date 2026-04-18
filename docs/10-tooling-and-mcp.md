@@ -19,6 +19,7 @@ Use VS Code as the execution base.
 - running tests
 - opening generated repomix bundles
 - inspecting staged chunk files
+- visual comparison of extraction outputs from different tools
 
 ### Do not use it as
 
@@ -41,6 +42,7 @@ Use Claude Desktop as the main reasoning workspace.
 ### Do not use it as
 
 - the sole durable memory layer
+- the first landing zone for raw official source documents
 
 ## Cline
 
@@ -115,6 +117,61 @@ Use Repomix to package repository context.
 - store outputs under `ai-input/` or a dedicated output directory
 - annotate the bundle purpose in the file name or config
 
+## Pandoc
+
+Use Pandoc as the canonical markdown exporter when you need a stable, reviewable text rendering of office-style documents.
+
+### Use it for
+
+- DOCX to GitHub-flavored Markdown conversion
+- media extraction with rewritten references
+- a readable master markdown used for human review
+- probe extractions that surface custom Word styles and TOC noise
+
+### Do not use it for
+
+- pretending the first conversion is already the final chunk corpus
+- deciding chunk boundaries by itself
+
+## Docling
+
+Use Docling when you need a structured second view of the same document.
+
+### Use it for
+
+- Markdown plus JSON extraction in parallel
+- structural signals that survive better than plain markdown alone
+- feeding a chunking step that wants document-aware metadata
+
+### Do not use it for
+
+- skipping manual QA of sensitive or high-value document sets
+- assuming its default chunkers are automatically your canonical project chunking policy
+
+## Mammoth
+
+Use Mammoth as a semantic QA lens for DOCX.
+
+### Use it for
+
+- checking whether headings and lists are real document structure
+- spotting conversion risks before chunking
+- producing an HTML view that helps compare semantic structure against Pandoc output
+
+### Do not use it for
+
+- making it the sole canonical output for the corpus
+- replacing review of screenshots, tables, and structurally fragile content
+
+## ImageMagick or another local image conversion tool
+
+Use it when document extraction produces formats that are awkward for GitHub, VS Code, or downstream review.
+
+### Examples
+
+- converting EMF exports into PNG or SVG for easier inspection
+- generating contact sheets or comparison boards for screenshot-heavy source drops
+
 ## filesystem MCP
 
 Use filesystem MCP sparingly.
@@ -132,6 +189,8 @@ Use filesystem MCP sparingly.
 - lower accidental disclosure
 - lower token cost
 - easier review
+
+The same logic applies to document workbenches: expose reviewed exports, not raw official drops, unless the task really requires it.
 
 ## repomix MCP
 
@@ -153,6 +212,12 @@ Use extraction tools to turn source documents into markdown before chunking.
 2. normalize the output
 3. chunk the markdown
 4. index the chunked corpus
+
+For official document workbenches, prefer a **dual extraction** mindset:
+
+1. one readable master markdown for humans
+2. one structured view for chunking and metadata
+3. one QA layer that exposes style noise and risky objects before canonical chunking
 
 ## Playwright MCP
 

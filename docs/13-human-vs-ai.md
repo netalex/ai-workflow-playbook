@@ -14,9 +14,11 @@ This playbook rejects both extremes.
 - defining the deliverable
 - approving architecture
 - setting the context boundary
+- deciding whether a source drop needs a dedicated workbench
 - validating generated bundles
 - deciding what becomes durable knowledge
 - checking correctness and business fit
+- approving source-priority rules and promotion decisions for official documents
 - approving commits and releases
 - maintaining scripts, hooks, and skills
 
@@ -45,6 +47,7 @@ The AI can produce:
 - summaries
 - bundle suggestions
 - structured notes
+- candidate source maps or conflict-register entries
 - candidate scripts
 - candidate skills
 

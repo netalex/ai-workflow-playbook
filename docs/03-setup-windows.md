@@ -16,6 +16,16 @@ Install and verify:
 - Repomix
 - CtxVault via `uv tool`
 
+## Official-document extras
+
+If you plan to process complex local document sets, add:
+
+- Pandoc
+- Docling
+- a local image conversion tool such as ImageMagick
+- Mammoth through `npm` or `npx` when you need semantic DOCX QA
+- LibreOffice Writer for visual QA only
+
 ## Install commands
 
 ### Core tools
@@ -49,6 +59,14 @@ ctxvault-mcp --help
 
 This playbook assumes `ctxvault` and `ctxvault-mcp` are installed this way.
 
+### Install or verify Pandoc and Docling
+
+```powershell
+pandoc --version
+docling --help
+magick -version
+```
+
 ## Recommended directory pattern
 
 Use a stable layout such as:
@@ -60,7 +78,8 @@ C:\Users\<you>\Work\
   ├── ai-output\
   ├── repomix-output\
   ├── vault-staging\
-  └── documents-to-ingest\
+  ├── documents-to-ingest\
+  └── document-workbenches\
 ```
 
 Consistency matters more than exact names.
@@ -75,6 +94,7 @@ Consistency matters more than exact names.
 - `repomix-output/` for generated bundles
 - `vault-staging/` for pre-chunked files waiting to be indexed
 - `documents-to-ingest/` for raw source documents
+- `document-workbenches/` for official or sensitive source drops that need a stronger local pipeline
 
 ### Treat VS Code as the base
 
@@ -151,7 +171,8 @@ The hooks are documented in [docs/12-repomix-automation.md](12-repomix-automatio
 5. CtxVault
 6. Claude Desktop
 7. editor assistants
-8. optional MCP servers
+8. official-document tools when needed
+9. optional MCP servers
 
 ## Security notes
 
@@ -162,3 +183,4 @@ Before using public or cloud-hosted AI:
 - do not index confidential raw documents directly
 - keep filesystem MCP scoped tightly
 - prefer pre-chunked markdown over arbitrary full files
+- keep raw official source drops in a local workbench until they have been reviewed and chunked

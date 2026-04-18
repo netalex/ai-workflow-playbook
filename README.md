@@ -9,6 +9,7 @@ This playbook is built around one primary idea: **use VS Code as the execution b
 - a **VS Code-first** operating model
 - a split between **reasoning**, **execution**, **memory**, and **context packaging**
 - a full **document ingestion and chunking pipeline**
+- a stronger pattern for **official document workbenches** when sources are sensitive, high-value, or structurally complex
 - **CtxVault** as durable local memory for both knowledge and custom skills
 - **Repomix** as the main context-packaging layer
 - **Claude Desktop**, **Cline**, **GitHub Copilot**, and **MCP servers** used in well-defined roles
@@ -27,6 +28,7 @@ This repository documents a stricter model:
 4. code assistants work best when the context is **bounded and pre-filtered**
 5. token cost is a first-class concern, not an afterthought
 6. repeated work should become a **template, script, hook, or skill**
+7. official source drops may deserve a **separate document workbench repository** before anything is promoted into the main project repo
 
 ## Core priorities
 
@@ -49,6 +51,17 @@ Task
   -> validate locally
   -> preserve useful knowledge in docs or ctxvault
   -> commit with Conventional Commits best practices
+```
+
+For large official document sets, the workflow may branch into a more explicit path:
+
+```text
+Official source drop
+  -> freeze originals in a workbench repo
+  -> QA the DOCX structure before conversion
+  -> run probe + master extraction locally
+  -> build canonical chunks and indexes
+  -> promote only validated artifacts into the project repo or vault
 ```
 
 ## Repository structure
@@ -92,13 +105,18 @@ Task
 │   ├── 12-repomix-automation.md
 │   ├── 13-human-vs-ai.md
 │   ├── 14-ctxvault-and-skills.md
-│   └── 15-token-cost-policy.md
+│   ├── 15-token-cost-policy.md
+│   ├── 16-official-document-workbench.md
+│   └── 17-docx-preflight-and-dual-extraction.md
 ├── scripts/
 │   ├── build-chunk-index.py
 │   ├── build-kb-chunks.py
 │   ├── check-tools.ps1
+│   ├── extract-official-sources.ps1
 │   ├── install-git-hooks.ps1
+│   ├── normalize-master-markdown.py
 │   ├── pre-publish-checklist.ps1
+│   ├── preflight-docx.py
 │   ├── refresh-ai-input.ps1
 │   ├── refine-kb-chunks.py
 │   ├── repomix-compose.ps1
@@ -108,6 +126,7 @@ Task
 │   └── test-ingestion-prerequisites.ps1
 └── templates/
     ├── commit-style.md
+    ├── docx-qa-template.md
     ├── implementation-request.md
     ├── review-request.md
     ├── session-kickoff.md
@@ -123,7 +142,8 @@ Task
 4. Configure Claude Desktop with the example in [config/claude/claude_desktop_config.example.json](config/claude/claude_desktop_config.example.json).
 5. Install the Git hooks with `pwsh ./scripts/install-git-hooks.ps1`.
 6. Read [docs/11-document-ingestion-and-chunking.md](docs/11-document-ingestion-and-chunking.md) before indexing any vault.
-7. Read [docs/12-repomix-automation.md](docs/12-repomix-automation.md) before exposing repository context to an LLM.
+7. Read [docs/16-official-document-workbench.md](docs/16-official-document-workbench.md) if your sources are official, sensitive, or structurally fragile.
+8. Read [docs/12-repomix-automation.md](docs/12-repomix-automation.md) before exposing repository context to an LLM.
 
 ## Recommended operating rhythm
 
@@ -158,7 +178,7 @@ The separation is deliberate.
 - architecture decisions
 - approval of prompts, skills, and hooks
 - acceptance criteria
-- review of code, docs, and generated context
+- review of code, docs, generated context, and official source interpretation
 - final commit and publish decision
 
 ### The AI owns
@@ -184,6 +204,7 @@ That changes the design:
 - repomix is configured, not sprayed over the whole repository
 - filesystem MCP can be restricted to `ai-input/` and a few safe directories
 - repeated work becomes scripts, hooks, or skills instead of repeated prompting
+- official source drops should often be processed in a **workbench repo** before anything is promoted into the main project knowledge surface
 
 See [docs/15-token-cost-policy.md](docs/15-token-cost-policy.md).
 
@@ -219,6 +240,7 @@ This playbook stands on top of tools and open work created by others.
   <https://claude.ai/download>
 - **Model Context Protocol (MCP)**: open protocol for connecting AI applications to tools and data  
   <https://modelcontextprotocol.io/>
+- **Pandoc**, **Docling**, **Mammoth**, and related local document tooling are also central to the official-document pipeline described in this repository.
 
 The workflow described here is an integration pattern built around those tools. The value is in the orchestration, not in pretending the underlying tools came from nowhere.
 
