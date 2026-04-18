@@ -85,7 +85,7 @@ Do not dump every extracted image into an LLM session. Promote only the screensh
 
 ```text
 Given this task, suggest the minimum useful set of files or modules for a repomix bundle.
-Also tell me what should stay listed-only or fully excluded to reduce token cost.
+Also tell me what should stay structure-only, be excluded from the content pass, or be fully excluded to reduce token cost.
 ```
 
 For official documents, a better version is:

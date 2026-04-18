@@ -78,18 +78,6 @@ documents-to-ingest/
   staging/
 ```
 
-## Scope of the bundled scripts
-
-The scripts published in this repository start from **normalized markdown**.
-
-That means the repository covers the pipeline from:
-
-- `normalized/` -> chunking -> refinement -> indexes -> staging -> ctxvault indexing
-
-Extraction from raw source documents is still part of the workflow, but it is intentionally left to tool-specific wrappers built around Docling, MarkItDown, Pandoc, or an equivalent converter.
-
-
-
 ### Workbench-oriented model
 
 ```text
@@ -117,9 +105,57 @@ workbench/
     for-sanitized-llm-use/
 ```
 
+## Ingestion drop
+
+An ingestion drop is the bounded intake area where new source documents land before chunking.
+
+In the simplest case, it is just a local folder or repository area that contains:
+
+- incoming raw documents
+- extracted outputs
+- normalized markdown
+- work directories for chunks, indexes, and staging
+
+For sensitive or official sources, this simple drop often grows into a dedicated workbench with stricter governance, QA, and promotion rules.
+
+## Scope of the bundled scripts
+
+The scripts published in this repository now cover two different entry points.
+
+### Standard mode
+
+For standard document ingestion, the bundled chunking pipeline starts from **normalized markdown**:
+
+- `normalized/` -> chunking -> refinement -> indexes -> staging -> ctxvault indexing
+
+This is the path implemented by:
+
+- `scripts/build-kb-chunks.py`
+- `scripts/refine-kb-chunks.py`
+- `scripts/build-chunk-index.py`
+- `scripts/run-ingestion-pipeline.ps1`
+- `scripts/sync-staging-to-ctxvault.ps1`
+
+### Official or sensitive source mode
+
+For official or structurally fragile DOCX-heavy sources, the repository also includes an earlier workbench-oriented entry point:
+
+- DOCX preflight QA
+- probe extraction
+- master extraction
+- optional markdown normalization before canonical chunking
+
+This is supported by:
+
+- `scripts/preflight-docx.py`
+- `scripts/extract-official-sources.ps1`
+- `scripts/normalize-master-markdown.py`
+
+The repository still does not fully automate every downstream decision in this mode. Canonical chunk design, screenshot inventory, source-map review, and conflict-register maintenance remain review-driven steps.
+
 ## Step 1 - Collect source documents
 
-Put source files in an intake area (i.e. `documents-to-ingest/incoming/`).
+Put source files in an intake area or ingestion drop (see [Ingestion drop](#ingestion-drop)).
 
 Examples:
 

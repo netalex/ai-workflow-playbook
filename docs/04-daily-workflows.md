@@ -142,7 +142,7 @@ You have new source documents that must become queryable knowledge.
 
 ### Sequence
 
-1. store the raw documents in an ingestion drop
+1. store the raw documents in an intake area or ingestion drop
 2. extract markdown using a controlled converter
 3. normalize the markdown
 4. chunk the documents
