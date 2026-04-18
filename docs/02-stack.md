@@ -125,6 +125,7 @@ Avoid these:
 - leaving repeated prompts undocumented
 - storing changing project state only in chat
 - using expensive repomix bundles when a small vault subset would do
+- do not git versioning vaults (if they corrupts, there's no way to recover original chunks from ctxvault)
 
 ## Substitution rule
 
